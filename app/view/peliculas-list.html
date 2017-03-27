@@ -1,0 +1,20 @@
+<p>Película favorita:</p>
+<button (click)=onShowHide(true) [class.showingData]="mostrarDatos===true">Mostrar datos</button>
+<button (click)=onShowHide(false) [class.showingData]="mostrarDatos===false">Ocultar datos</button>  
+  <ul *ngIf="mostrarDatos===true">
+        <li>Título: {{pelicula.titulo}}</li>
+        <li>Director: {{pelicula.director}}</li>
+        <li>Año: {{pelicula.anyo}}</li>
+    </ul>
+
+    <p>
+        Cambiar título: <input type="text" (keypress)="debug()" [(ngModel)]="pelicula.titulo"/>
+    </p>
+    <hr/>
+    <p>Listado de películas</p>
+    <ul *ngFor="#pelicula of peliculas">
+        <li (click)="onCambiarPelicula(pelicula)" class="pelicula-title" [class.clicked]="pelicula.titulo===peliculaElegida.titulo">Título: {{pelicula.titulo}}</li>
+        <li>Director: {{pelicula.director}}</li>
+        <li>Año: {{pelicula.anyo}}</li>
+        <li><a [routerLink]="['CrearPeliculaBasadaEnOtra', {titulo:pelicula.titulo, director:pelicula.director, anyo:pelicula.anyo}]">Añadir película basada en esta</a></li>
+    </ul>
